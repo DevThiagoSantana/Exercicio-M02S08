@@ -1,23 +1,39 @@
 import './Produtos.css';
 import { Card } from '../../components/Card';
-import {useProdutos} from'../../hooks/useProdutos';
+import { useProdutos } from '../../hooks/useProdutos';
 
 export const Produtos =() =>{
-
   const{error,isLoading,produtos} = useProdutos();
+  
+  if (isLoading) {
+    return <p>Carregando...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return(
-      <section className='secao'>
-          <h2 className='secao-titulo'>Produtos</h2>
-          <hr />
-          <div className='lista'>
-          <Card
-          imagem = "http://localhost:8081/assets/cordeiro.png"
-          nome = "Cordeiro Lajeana"
-          descricao = "Carré grelhado com delicado molho de três pimentas, batata suíça e banana caramelada."
-          valor = {169}
-          tempoPreparo = "50 min"/>
+    <>    
+    {!!produtos &&
+        Object.keys(produtos).map((secao) => (
+          <section key={secao} className='secao'>
+            <h2 className='secao-titulo'>{secao}</h2>
+
+            <div className='lista'>
+            {produtos[secao].map((item) => (
+                <Card
+                key={item.id}
+                imagem={item.img}
+                nome={item.nome}
+                descricao={item.descricao}
+                valor={item.valor}
+                tempoPreparo={item.tempoPreparo}
+                />
+            ))}
           </div>
       </section>
-  )
-}
+      ))}
+      </>
+  );
+};
