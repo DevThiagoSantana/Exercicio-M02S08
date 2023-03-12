@@ -8,6 +8,7 @@
   cursor: pointer;
   border: 1px solid #1d1d1d;
 }
+
 .card-info {
   display: flex;
   flex-direction: column;
@@ -21,10 +22,14 @@
 .card-description {
   font-size: 10px;
 }
+
 .card-footer {
   display: flex;
   justify-content: space-between;
   color: #943e2f;
+}
+.card-selecionado {
+  border: 1px solid #943e2f;
 }
 
 .img {
